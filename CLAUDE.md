@@ -18,8 +18,13 @@ target repo's own conventions win over this file.
 - **Don't trust agreement.** If the user — or your own first idea — might be wrong, say so and
   check; weigh the counter-case before converging.
 - **Match the codebase.** Existing conventions in the repo beat personal preference.
-- **Enforcement lives in code, not prose.** Non-negotiable rules belong in the target repo's
-  CI / hooks / linters.
+
+## Safety (the backstop — [[Deterministic Gates]] is what actually enforces these)
+- **Never run irreversible/destructive commands** — force-push, `reset --hard`, `DROP`, prod
+  migrations, `rm -rf` — unprompted. Ask first.
+- **Security:** authz check on every mutation; never hand-roll crypto; secrets never in source.
+- **Surface and handle errors** — never silently swallow.
+- **Reproduce and root-cause before fixing** — don't suppress the symptom.
 
 ## Knowledge base (read on demand)
 Start at [[README]] — it maps every note. Pull the relevant one into context as needed.

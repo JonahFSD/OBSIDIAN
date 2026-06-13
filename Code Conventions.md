@@ -13,6 +13,7 @@ or stack gets its own note, linked from here, so they cluster together in the gr
 ## Practices
 - [[Writing Tests]] — test-writing heuristics.
 - [[Writing Documentation]] — documentation heuristics.
+- [[Deterministic Gates]] — the enforcement tooling behind the rules; wire it into a repo.
 
 ## Languages & stacks
 - [[TypeScript Development]] — type system, generics, utility types, type guards, React/Node patterns, `tsconfig`, strict mode.
