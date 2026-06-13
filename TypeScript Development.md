@@ -5,6 +5,52 @@ description: TypeScript development best practices including type system, generi
 
 > Modern TypeScript patterns and type-safe development.
 
+## Strict baseline (agent-defensive)
+
+The cheapest gate against an agent breaking a function is the compiler — a broken contract becomes
+a build error instead of a silent runtime bug. Lean recommended baseline (from
+[@tsconfig/strictest](https://github.com/tsconfig/bases/blob/main/bases/strictest.json) + the
+[Total TypeScript cheat sheet](https://www.totaltypescript.com/tsconfig-cheat-sheet)):
+
+```jsonc
+{
+  "compilerOptions": {
+    "strict": true,                     // strictNullChecks, noImplicitAny, strictFunctionTypes, useUnknownInCatchVariables…
+    "noUncheckedIndexedAccess": true,   // arr[i] is T | undefined — kills assumed-index bugs
+    "noImplicitOverride": true,         // `override` required — can't silently orphan a base-method override
+    "noImplicitReturns": true,          // every path returns — catches a dropped return branch
+    "noFallthroughCasesInSwitch": true, // no missing `break`
+    "noUnusedLocals": true,             // dead local = a rewrite that dropped logic
+    "noUnusedParameters": true,         // abandoned param = silent signature change
+    "verbatimModuleSyntax": true,       // explicit `import type` — no type/value import mixups under ESM/CJS
+    "isolatedModules": true,
+    "skipLibCheck": true                // perf, not safety
+  }
+}
+```
+
+Gate it: **`tsc --noEmit` in CI** — editor squiggles don't block an agent's commit; the CI command does.
+
+High-value flags by the regression each catches (all default `false`, none in `strict`):
+`noUncheckedIndexedAccess` → off-by-one / out-of-bounds · `noImplicitReturns` → a branch that
+forgets to return · `noFallthroughCasesInSwitch` → a dropped `break` · `noImplicitOverride` → a
+base method renamed away, orphaning a broken override · `verbatimModuleSyntax` → a type-only import
+treated as a value (runtime crash). **Add only deliberately (noisy):** `exactOptionalPropertyTypes`,
+`noPropertyAccessFromIndexSignature`.
+
+**Typed-eslint** (needs [typed linting](https://typescript-eslint.io/getting-started/typed-linting); run in CI):
+- `@typescript-eslint/no-floating-promises` + `no-misused-promises` — the dropped `await` (the #1 agent footgun).
+- `@typescript-eslint/switch-exhaustiveness-check` — added a union member but not its branch.
+- `@typescript-eslint/explicit-module-boundary-types` — pins exported signatures so inference can't silently shift a public contract.
+- `eqeqeq` + `no-explicit-any` (so the agent can't paper over a real type error). `no-unnecessary-condition` / `no-unsafe-*` are higher-value but noisier — adopt once your types are clean.
+
+**Pin the contract so a signature change can't be silent:**
+- [`@microsoft/api-extractor`](https://api-extractor.com/) → a committed `.api.md`; any public-API change shows up as a reviewable diff that fails CI. Strongest defense against silent signature drift.
+- [`tsd`](https://github.com/tsdjs/tsd) / [`expect-type`](https://www.npmjs.com/package/expect-type) → type-tests that assert a function's signature stays stable.
+
+This is the language-level half of [[Deterministic Gates]]: the type system pins the *contract*;
+the regression suite (run every turn) pins the *behavior*. See [[Writing Tests]] for the latter.
+
 ## Type Fundamentals
 
 ### Basic Types

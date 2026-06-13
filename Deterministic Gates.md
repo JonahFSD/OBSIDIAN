@@ -24,6 +24,14 @@ notes the failure cluster it covers and whether it's a hard block or advisory.
 | Dependency scan | lockfile + `--frozen-lockfile`; `npm audit` / OSV-Scanner; Socket (`sfw`) | known-vuln + hallucinated/malicious packages (Dependencies) | hard |
 | Tests + coverage gate | the project's runner + a coverage threshold in CI | regressions; forces error-branch tests (Error handling / Debugging) | hard |
 
+**TypeScript specifics** (baseline `tsconfig` + rationale in [[TypeScript Development]]): gate
+`tsc --noEmit` (`strict` + `noUncheckedIndexedAccess`, `noImplicitReturns`,
+`noFallthroughCasesInSwitch`, `noImplicitOverride`, `verbatimModuleSyntax`) in CI; typed-eslint
+(`no-floating-promises`, `no-misused-promises`, `switch-exhaustiveness-check`); and a committed
+`@microsoft/api-extractor` `.api.md` as an **API-contract gate** (a changed public signature fails
+review). These catch the function-breaking regressions agents introduce — broken branches, dropped
+awaits, silent signature drift.
+
 ## Agent-runtime gates — block bad actions before they run
 
 - **PreToolUse hook / Bash deny-list** — refuse `git reset --hard`, `push --force`, destructive
