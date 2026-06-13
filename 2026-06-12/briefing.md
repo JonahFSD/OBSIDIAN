@@ -20,3 +20,7 @@ are compacted into typed notes at retro.
   **Obsidian Knowledge Base** repo at `~/ARCHIPELIGO/OBSIDIAN/` and rescoped the linter.
 - **Open:** flesh out `profile.md`; run a real warmup next session.
 - **Tomorrow:** say "warmup" to exercise the staleness ratchet end to end.
+
+
+---
+_Related:_ [[CHARLIE]] · [[2026-06-12 retro]]

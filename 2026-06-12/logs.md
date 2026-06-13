@@ -26,3 +26,7 @@ Append-only execution journal. Newest at the bottom.
   to the durable subtree (`Notes/`, `Inbox/`, `Archive/` + hubs); repaired all paths in the docs
   and tools; left `.github/.claude` out of OKB per Jonah (the §7 workflows are authoritative).
 - Verified lint clean + negative test; re-committed.
+
+
+---
+_Related:_ [[CHARLIE]] · [[2026-06-12 retro]]
