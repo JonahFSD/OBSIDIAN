@@ -1,0 +1,15 @@
+# --- Obsidian application / session state ---
+# Policy: application UI/session state is never part of the ledger.
+# The vault's *content* is tracked; the app's view state is not.
+KB/.obsidian/
+KB/.trash/
+
+# --- macOS / OS cruft ---
+.DS_Store
+**/.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Editor scratch ---
+*.swp
+*~
