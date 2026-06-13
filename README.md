@@ -1,4 +1,4 @@
-# Obsidian Knowledge Base
+# AI hard drive 
 
 Curated knowledge base for an AI coding agent. **Start here** — this maps every note; each is read
 on demand. Keep notes lean; edit them freely.
