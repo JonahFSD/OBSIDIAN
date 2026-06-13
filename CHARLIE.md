@@ -284,3 +284,8 @@ shell + git). Git is fully local — internal content is not published off-machi
 | Linter/tooling lost | Re-create from this spec; depends only on stock tooling |
 | Drift between docs | This file wins (I6); all others are pointers by construction |
 ```
+
+
+---
+## Related
+[[REFERENCE]] · [[PROVENANCE]] · [[profile]] · [[Active Context]] · [[action-ledger]] · [[Meta-Cognition]] · [[Retrieval Strategies]]

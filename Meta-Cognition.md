@@ -40,3 +40,8 @@ Record each firing in a retro **before** building the component.
   linter rescoped to the durable subtree (`Notes/`, `Inbox/`, `Archive/` + hubs). See `PROVENANCE.md`.
 
 <!-- Append future process changes here, newest at the bottom, each dated and linked to its retro. -->
+
+
+---
+## Related
+[[CHARLIE]] · [[Retrieval Strategies]] · [[REFERENCE]] · [[2026-06-12 retro]]

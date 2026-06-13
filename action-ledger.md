@@ -11,3 +11,8 @@
 ## Completed
 - [x] Build the memory system on this machine: scaffold, canonical docs, pinned files, workflow
   prompts, Python linter, vault structure, hooks, git ledger. _(done 2026-06-12)_
+
+
+---
+## Related
+[[CHARLIE]] · [[Active Context]] · [[profile]]

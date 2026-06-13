@@ -33,3 +33,8 @@ get recorded here at retro.
   index yet (its growth trigger has not fired — see `[[Meta-Cognition]]`). See `[[2026-06-12 retro]]`.
 
 <!-- Append future search-behavior changes here, dated and linked to the retro that introduced them. -->
+
+
+---
+## Related
+[[CHARLIE]] · [[Meta-Cognition]]

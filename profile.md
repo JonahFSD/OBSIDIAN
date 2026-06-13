@@ -24,3 +24,8 @@ against the pinned-set budget. Detail belongs in vault notes, not here.
 ## Baseline context
 - _Ongoing themes, recurring projects, standing constraints — keep to a few lines; promote
   detail into `Notes/Projects/` and link rather than expanding here._
+
+
+---
+## Related
+[[CHARLIE]] · [[Active Context]] · [[action-ledger]]

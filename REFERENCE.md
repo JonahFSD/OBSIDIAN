@@ -259,3 +259,8 @@ non-duplicative · today's work stays in daily files · repeated patterns get pr
 pinned material gets evicted · superseded knowledge is visible as such · the Health trend is
 green without human prompting · a fresh instance can recover the full operating model from files
 alone — this document plus `CHARLIE.md` being the proof.
+
+
+---
+## Related
+[[CHARLIE]] · [[PROVENANCE]] · [[Meta-Cognition]] · [[Retrieval Strategies]]

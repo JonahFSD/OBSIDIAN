@@ -63,3 +63,8 @@ Each remains correctly absent until its written trigger fires. See `Meta-Cogniti
 The inaugural commits of this repository record the build and the same-day restructure, and the
 inaugural retro note (`Notes/Retro/2026-06-12 retro.md`) records the build as the first
 compaction and sets the baseline for the warmup staleness ratchet.
+
+
+---
+## Related
+[[CHARLIE]] · [[REFERENCE]] · [[Meta-Cognition]]

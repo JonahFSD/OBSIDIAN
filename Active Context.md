@@ -17,3 +17,8 @@ repo at `~/ARCHIPELIGO/OBSIDIAN/`. No active work threads yet.
 ## Next likely action
 On the next session, say **"warmup"**. The ratchet will check days since the last retro and, if
 overdue, offer to run a retro before new work.
+
+
+---
+## Related
+[[CHARLIE]] · [[profile]] · [[action-ledger]] · [[2026-06-12 retro]]
