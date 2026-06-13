@@ -1,7 +1,4 @@
 ---
-type: concept
-created: 2026-06-12
-status: active
 description: The durable LLM failure modes that make "good code" good in the AI age, plus the caveats. The invariants that follow live in [[Invariants]]; domain heuristics in [[Writing Tests]] and [[Writing Documentation]].
 ---
 # Good Code in the AI Age

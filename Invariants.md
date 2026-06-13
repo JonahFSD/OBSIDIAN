@@ -1,7 +1,4 @@
 ---
-type: concept
-created: 2026-06-12
-status: active
 description: Code invariants for the AI age — each grounded in a durable LLM failure mode. See [[Good Code in the AI Age]] for the failure-mode substrate and the caveats.
 ---
 # Invariants

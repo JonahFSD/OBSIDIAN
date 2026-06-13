@@ -1,7 +1,4 @@
 ---
-type: concept
-created: 2026-06-13
-status: active
 description: Heuristics for writing good documentation, with an AI-age lens. Each entry — heuristic → failure it prevents → confidence → source. Unifying rule — minimize what the reader (human or agent) must process to act, and keep it from drifting.
 ---
 # Writing Documentation

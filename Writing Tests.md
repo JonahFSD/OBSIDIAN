@@ -1,7 +1,4 @@
 ---
-type: concept
-created: 2026-06-13
-status: active
 description: Heuristics for writing good tests, with an AI-age lens. Each entry — heuristic → failure it prevents → confidence → source. Tests are the agent's main external verification signal; see [[Invariants]] #2 and #9.
 ---
 # Writing Tests

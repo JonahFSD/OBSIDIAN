@@ -1,7 +1,5 @@
 ---
-type: concept
-created: 2026-06-12
-status: active
+description: Conventions hub — Conventional Commits and per-language coding standards; links the principle and practice notes.
 ---
 # Code Conventions
 

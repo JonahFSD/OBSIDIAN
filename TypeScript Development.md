@@ -1,7 +1,4 @@
 ---
-type: concept
-created: 2026-06-12
-status: active
 description: TypeScript development best practices including type system, generics, utility types, configuration, and patterns for React, Node.js, and full-stack applications. Use when writing TypeScript code, converting JavaScript to TypeScript, debugging type errors, or implementing type-safe patterns.
 ---
 # TypeScript Development
