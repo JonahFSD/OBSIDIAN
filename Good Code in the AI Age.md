@@ -2,7 +2,7 @@
 type: concept
 created: 2026-06-12
 status: active
-description: Global invariants for writing good code in the AI age — practices that earn their weight because they counter durable LLM failure modes and raise the signal density of a limited, attention-imperfect context window. Grounded in primary research.
+description: The durable LLM failure modes that make "good code" good in the AI age, plus the caveats. The invariants that follow live in [[Invariants]]; domain heuristics in [[Writing Tests]] and [[Writing Documentation]].
 ---
 # Good Code in the AI Age
 
@@ -31,43 +31,8 @@ only when it pays for the context it costs.
 - **Premature convergence.** Agents lock onto the first plausible approach and under-explore.
 - **Statelessness.** No memory persists across sessions; context must be re-loaded every time.
 
-## The invariants
-
-1. **Make the context smaller and denser than feels necessary.** *Counters:* finite attention,
-   context rot. *Why always true:* attention is a fixed budget; effective << advertised. *Cost/
-   payoff:* costs editorial discipline; large payoff — omission is a feature, not a loss.
-2. **Put verification outside the model.** Types, a pre-existing human test suite, static
-   analysis, a reproducible build — signals it can't fake. *Counters:* no self-verification.
-   *Why:* the model can't introspect correctness but *can* react to a concrete failure report.
-   *Payoff:* the single highest-evidence lever here.
-3. **Treat recalled facts as low-trust hypotheses; check them against ground truth.** Pin
-   versions, load current docs, confirm a package exists before importing. *Counters:* stale
-   knowledge / hallucinated APIs. *Why:* knowledge is frozen at cutoff; re-prompting repeats the
-   same hallucination rather than fixing it.
-4. **Make types explicit.** *Counters:* silent interface mismatches, hallucinated signatures.
-   *Why:* the type checker is the dominant error gate (~94% of compile errors are type errors) and
-   catches ~15% of would-be-shipped bugs — a high-value first filter, never a correctness proof
-   (logic bugs type-check). See [[TypeScript Development]].
-5. **Keep history legible and append-only.** Conventional Commits + **small atomic diffs** + the
-   *why* in the message (the diff already shows the *what*). *Counters:* weak localization,
-   unreviewable change. *Why:* human defect-detection collapses past ~400 LOC, and a diff carries
-   no intent; small, typed, machine-parseable history is bisectable and revertible. The entry
-   point for this whole topic — see [[Code Conventions]].
-6. **Optimize for localizability.** Navigable, grep-able, consistently-organized code with
-   intention-revealing names. *Counters:* finite attention + editing-the-wrong-thing. *Why:*
-   fault-localization precision measurably gates agent repair success; agents navigate by
-   grep/tree/symbol tools, and names are a comprehension input (the model reads code as text).
-7. **A rules/convention artifact earns its place only if omitting it would cause a mistake.**
-   Prune ruthlessly. *Counters:* context rot, irrelevant-context degradation. *Why:* a bloated
-   always-loaded rules file (CLAUDE.md/AGENTS.md) makes the model ignore the rules that matter —
-   the important ones drown in noise. The convention must pay rent in prevented errors.
-8. **Persist memory in durable external files; re-load at session start.** *Counters:*
-   statelessness. *Why:* a fresh session knows nothing it wasn't re-told; persist decisions,
-   conventions, and gotchas in durable files and re-load them rather than re-deriving context.
-9. **Don't trust agreement; force the counter-case, and verify behavior not proximity.**
-   *Counters:* sycophancy + premature convergence + false "done." *Why:* agreement is the
-   predicted failure, not a signal; "tests near the diff pass" ≠ correct — require a full
-   regression run and a behavioral check before trusting a fix.
+The invariants that follow from these are an append-only ledger: **[[Invariants]]**. Domain
+heuristics derived the same way: **[[Writing Tests]]**, **[[Writing Documentation]]**.
 
 ## Skeptic's corner (don't oversell)
 
@@ -75,8 +40,8 @@ only when it pays for the context it costs.
   **direction** (length and middle-position hurt) is robust. Treat "X% drop at position N" as
   model-specific, not a constant.
 - **Agent-*written* tests are weak verification** — used as print-style observation, not real
-  oracles. The lift in invariant 2 comes from *pre-existing human tests as a target*, not from an
-  agent inventing its own. "Agents should just TDD themselves" is partly hype.
+  oracles. The lift in [[Invariants]] #2 comes from *pre-existing human tests as a target*, not from
+  an agent inventing its own. "Agents should just TDD themselves" is partly hype.
 - **Docstrings help only ~1–3%** in controlled studies — write them for humans/intent, don't
   expect magic for agent correctness.
 - "AI is degrading code quality" macro stats are vendor analyses, not peer-reviewed — low confidence.
@@ -98,4 +63,4 @@ only when it pays for the context it costs.
 
 ---
 ## Related
-[[Code Conventions]] · [[TypeScript Development]]
+[[Invariants]] · [[Writing Tests]] · [[Writing Documentation]] · [[Code Conventions]] · [[TypeScript Development]]

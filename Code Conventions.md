@@ -9,7 +9,12 @@ Hub for durable coding conventions and language/framework best-practice referenc
 or stack gets its own note, linked from here, so they cluster together in the graph.
 
 ## Principles
-- [[Good Code in the AI Age]] — invariants that earn their weight against durable LLM failure modes (signal density, external verification).
+- [[Good Code in the AI Age]] — durable LLM failure modes (the "why") + caveats.
+- [[Invariants]] — the coding invariants that follow (append-only ledger).
+
+## Practices
+- [[Writing Tests]] — test-writing heuristics (append-only ledger).
+- [[Writing Documentation]] — documentation heuristics (append-only ledger).
 
 ## Languages & stacks
 - [[TypeScript Development]] — type system, generics, utility types, type guards, React/Node patterns, `tsconfig`, strict mode.

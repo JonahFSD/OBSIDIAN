@@ -26,6 +26,10 @@ repo's own conventions win over this file.
 - Non-negotiable rules belong in the target repo's CI / hooks / linters, not in prose here.
 
 ## Knowledge base (read on demand)
-- [[Good Code in the AI Age]] — the invariants above, each grounded in a durable LLM failure mode, with sources.
+Knowledge notes are **append-only ledgers** — add entries and supersede; don't overwrite or delete.
+- [[Good Code in the AI Age]] — the durable LLM failure modes (the "why") + caveats.
+- [[Invariants]] — the coding invariants that follow (ledger).
+- [[Writing Tests]] — test-writing heuristics (ledger).
+- [[Writing Documentation]] — documentation heuristics (ledger).
 - [[Code Conventions]] — conventions hub (Conventional Commits; per-language standards).
 - [[TypeScript Development]] — TypeScript patterns, generics, utility types, type guards, React/Node, `tsconfig`, strict mode.
