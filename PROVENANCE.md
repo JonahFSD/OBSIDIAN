@@ -16,14 +16,14 @@ not happen here. This instance was **built fresh**, not migrated.
 
 ## Decisions made at build time (the macOS adaptations)
 
-| Original (Windows) | This instance (macOS) | Why |
-|---|---|---|
-| Workspace root `C:\Uniti\workspace\` | the OKB repo `~/ARCHIPELIGO/OBSIDIAN/` | A self-contained vault+repo on Jonah's machine (see Restructure below). |
-| Durable store `vault\` | the durable subtree of the vault (`Notes/`, `Inbox/`, `Archive/` + hubs) | Reuses Jonah's existing Obsidian vault rather than a parallel store. |
-| Linter in PowerShell (`lint-vault.ps1` + `lint.cmd`) | Python 3 (`lint_vault.py` + `lint.sh`) | No PowerShell on macOS by default; Python 3 stdlib gives robust frontmatter parsing while staying dependency-free. |
-| `lint.cmd` invocation wrapper | `lint.sh` (POSIX, `chmod +x`) | Same "encode the parser-sensitive invocation exactly once" policy, in the native shell. |
-| Migration records (3 files) | this `PROVENANCE.md` | Nothing was migrated; an honest build record is the correct artifact. |
-| Retro hook in Claude Code `settings.json` | the warmup staleness ratchet (primary); hook optional | The ratchet is sufficient and tool-independent; a Stop hook is an optional mirror, not part of OKB. |
+| Original (Windows)                                   | This instance (macOS)                                                    | Why                                                                                                                |
+| ---------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| Workspace root `C:\Uniti\workspace\`                 | the OKB repo `~/ARCHIPELIGO/OBSIDIAN/`                                   | A self-contained vault+repo on Jonah's machine (see Restructure below).                                            |
+| Durable store `vault\`                               | the durable subtree of the vault (`Notes/`, `Inbox/`, `Archive/` + hubs) | Reuses Jonah's existing Obsidian vault rather than a parallel store.                                               |
+| Linter in PowerShell (`lint-vault.ps1` + `lint.cmd`) | Python 3 (`lint_vault.py` + `lint.sh`)                                   | No PowerShell on macOS by default; Python 3 stdlib gives robust frontmatter parsing while staying dependency-free. |
+| `lint.cmd` invocation wrapper                        | `lint.sh` (POSIX, `chmod +x`)                                            | Same "encode the parser-sensitive invocation exactly once" policy, in the native shell.                            |
+| Migration records (3 files)                          | this `PROVENANCE.md`                                                     | Nothing was migrated; an honest build record is the correct artifact.                                              |
+| Retro hook in Claude Code `settings.json`            | the warmup staleness ratchet (primary); hook optional                    | The ratchet is sufficient and tool-independent; a Stop hook is an optional mirror, not part of OKB.                |
 
 ## Restructure (same day, 2026-06-12)
 
