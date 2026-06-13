@@ -19,6 +19,12 @@ repo's own conventions win over this file.
   check; weigh the counter-case before converging.
 - **Match the codebase.** Existing conventions in the repo beat personal preference.
 
+## Working memory
+- Read `NOTES.md` first; record your plan, progress, and decisions there as you work; keep it
+  pruned — edit in place and delete stale lines, don't let it grow into contradictory clutter.
+- Durable decisions graduate to `decisions/` (ADR-lite: append-only; supersede, never overwrite).
+- Non-negotiable rules belong in the target repo's CI / hooks / linters, not in prose here.
+
 ## Knowledge base (read on demand)
 - [[Good Code in the AI Age]] — the invariants above, each grounded in a durable LLM failure mode, with sources.
 - [[Code Conventions]] — conventions hub (Conventional Commits; per-language standards).
