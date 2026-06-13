@@ -13,20 +13,20 @@ get recorded here at retro.
 - **Pinned-set first.** Start from `profile.md`, `Active Context.md`, `action-ledger.md`, and
   today's `briefing.md`. They are already loaded — exploit them before searching.
 - **≤ 3 links, then stop.** Follow at most three links out from the pinned set per orientation.
-- **Grep on demand, never broad scans.** Targeted `grep`/`rg` over `KB/` beats reading folders.
+- **Grep on demand, never broad scans.** Targeted `grep`/`rg` over `Notes/` beats reading folders.
 - **Canonical-note-first lookup.** Before writing a new note, grep for an existing one on the
   subject and update it in place.
 - **Supersession-aware.** Filter or explicitly flag `status != active`. Cite a superseded note
   only alongside its successor (`superseded_by`).
 
 ## Proven patterns
-- Find all notes of a type: `grep -rl '^type: project' KB/Notes/Projects/` (or just list the
+- Find all notes of a type: `grep -rl '^type: project' Notes/Projects/` (or just list the
   folder — folder↔type law guarantees the mapping).
 - Find superseded notes that still need a successor check:
-  `grep -rl '^status: superseded' KB/`.
-- Find recent activity: scan the newest `YYYY-MM-DD/` daily folders at the workspace root.
-- Find a person/system/project by partial name: `grep -ril '<term>' KB/Notes/`.
-- Locate the newest retro (and the Health trend): `ls KB/Notes/Retro/`.
+  `grep -rl '^status: superseded' Notes/ Inbox/ Archive/`.
+- Find recent activity: scan the newest `YYYY-MM-DD/` daily folders at the repo root.
+- Find a person/system/project by partial name: `grep -ril '<term>' Notes/`.
+- Locate the newest retro (and the Health trend): `ls Notes/Retro/`.
 
 ## Patterns log
 - **2026-06-12** — Initial strategies seeded at build. Retrieval is grep-based; no FTS5/SQLite

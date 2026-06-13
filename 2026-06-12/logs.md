@@ -15,4 +15,14 @@ Append-only execution journal. Newest at the bottom.
   `tools/retro_status.py`, `.claude/settings.json` advisory Stop hook. Smoke-tested: lint exits
   0 on the empty vault; retro_status reports no baseline yet.
 - Wrote vault hubs `Meta-Cognition.md` + `Retrieval Strategies.md` and the inaugural retro note.
-- Next: measure pinned budget, fill the retro Health block, initialize git, commit.
+- Measured pinned budget (~895 tokens), filled the retro Health block, initialized git, committed.
+
+## Restructure (later same day)
+- Jonah renamed `~/CODE` → `~/ARCHIPELIGO` (his code workspace, also holding `Arena/`, `Bayview/`,
+  `MedAI/` — each its own repo) and the vault `KB/` → `OBSIDIAN/`, and moved the operating files
+  into the vault.
+- Consolidated to match: scoped the git repo to `OBSIDIAN/` (its own `.git`) so the **Obsidian
+  Knowledge Base (OKB)** is self-contained and the other repos are untouched; rescoped the linter
+  to the durable subtree (`Notes/`, `Inbox/`, `Archive/` + hubs); repaired all paths in the docs
+  and tools; left `.github/.claude` out of OKB per Jonah (the §7 workflows are authoritative).
+- Verified lint clean + negative test; re-committed.

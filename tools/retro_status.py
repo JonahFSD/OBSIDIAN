@@ -42,9 +42,9 @@ def newest_retro(retro_dir):
 
 
 def main():
-    here = Path(__file__).resolve().parent
-    repo_root = here.parent
-    retro_dir = repo_root / "KB" / "Notes" / "Retro"
+    here = Path(__file__).resolve().parent   # tools/ (inside the vault)
+    vault = here.parent                       # the vault root (OBSIDIAN)
+    retro_dir = vault / "Notes" / "Retro"
 
     d, path = newest_retro(retro_dir)
     today = date.today()

@@ -1,17 +1,21 @@
-# The Memory System — Complete Reference (macOS instance)
+# The Obsidian Knowledge Base — Complete Reference (macOS instance)
 
 **Status of this document:** Descriptive reference, written for consumption by another
 document, agent, or person. It is **not** a second operating authority. Per invariant I6, the
-single canonical operating document is `CHARLIE.md` at the workspace root; if this reference and
+single canonical operating document is `CHARLIE.md` at the repo root; if this reference and
 `CHARLIE.md` ever disagree, **`CHARLIE.md` wins and this document is stale.** Items marked
 ⚠ AS-BUILT depend on choices made when this instance was built and should be verified against
 the machine before being relied on.
 
 This instance was built on **2026-06-12** on a personal **macOS** machine, recreated from the
-original Windows reference. Adaptations from the original: workspace root is `~/CODE` (not
-`C:\Uniti\workspace`); the durable store is the existing Obsidian vault `KB/` (not `vault/`);
-the schema linter is **Python 3** (not PowerShell); there was no migration, so the migration
-records are replaced by `PROVENANCE.md`. See `PROVENANCE.md` for the full build record.
+original Windows reference, then consolidated into one self-contained Obsidian vault + git repo:
+the **Obsidian Knowledge Base (OKB)**. Adaptations from the original: the system root is the
+**OKB repo** at `~/ARCHIPELIGO/OBSIDIAN/` (the original used `C:\Uniti\workspace` with a `vault\`
+subfolder); the OKB *is* the Obsidian vault and holds the operating files *and* the durable
+notes; the schema linter is **Python 3** (not PowerShell); the repo is self-contained, so
+`~/ARCHIPELIGO/` is merely the parent folder that holds OKB next to other independent projects
+(`Arena/`, `Bayview/`, `MedAI/`); and there was no migration, so the migration records are
+replaced by `PROVENANCE.md`. See `PROVENANCE.md` for the full build record.
 
 ---
 
@@ -19,7 +23,7 @@ records are replaced by `PROVENANCE.md`. See `PROVENANCE.md` for the full build 
 
 A retrieval-first, ledger-structured personal memory system for an AI assistant ("Charlie")
 operating on a personal macOS machine. Human-readable Markdown is the sole source of truth;
-every guarantee that matters is enforced by mechanism (git, lint, hooks, budgets) rather than by
+every guarantee that matters is enforced by mechanism (git, lint, budgets) rather than by
 behavioral intention.
 
 Design lineage: the architecture is one pattern — **append-only history as truth, with derived,
@@ -34,7 +38,7 @@ underlies git, LSM trees, event sourcing, Kafka, and the Convex database.
 | `profile.md`, `Active Context.md`, `action-ledger.md`, today's `briefing.md` | **Pinned memory** (pages never evicted) | Loaded every session → highest cost per token → strictly budgeted |
 | Daily `logs.md` / `briefing.md` | **Write-ahead log / journal** | In-session writes are cheap, append-only, judgment-free |
 | Retro | **LSM compaction pass** | Merges journal → durable storage; extracts cross-session signal; promotes/demotes |
-| Vault (`KB/`) | **Durable storage / source of truth** | Schema-enforced, lint-gated, supersession-aware |
+| Durable notes (`Notes/`, `Inbox/`, `Archive/` + hubs) | **Durable storage / source of truth** | Schema-enforced, lint-gated, supersession-aware |
 | Git repository | **The ledger** | Every state transition recoverable, diffable, bisectable |
 | Manifests, links | **Page table** | Sessions fault pages in lazily via read/grep |
 | Retrieval (grep now; FTS5 later) | **Derived index** | Disposable; rebuildable from the Markdown at any time |
@@ -46,43 +50,30 @@ log with near-zero ceremony; defer all durability judgment to compaction (retro)
 ## 3. Physical layout
 
 ```
-~/CODE/                              ← workspace root = transient operating surface; git repo root
-├── .git/                            Local-only repository. No remote. The ledger.
-├── .gitignore                       Excludes KB/.obsidian/, KB/.trash/, .DS_Store, etc.
-│                                    Policy: application UI/session state is never part of the ledger.
-│
-├── CHARLIE.md                       ★ THE canonical operating document (invariant I6).
-├── REFERENCE.md                     This file: descriptive snapshot.
-├── PROVENANCE.md                    Build record (replaces the original migration documents).
-│
-├── profile.md                       Pinned. Stable profile of Jonah + Charlie.
-├── Active Context.md                Pinned. Live scratchpad of what is in progress NOW.
-│                                    Overwritten ONLY as the final, gated step of retro.
-├── action-ledger.md                 Pinned. Open commitments. Erase-free: completions MOVE to
-│                                    a ## Completed section with a date stamp, never deleted.
-│
-├── tools/
-│   ├── lint_vault.py                Schema linter. Python-3 stdlib only; zero pip dependencies
-│   │                                (policy: enforcement tooling depends only on a stock dev install).
-│   ├── lint.sh                      The ONLY sanctioned invocation: wraps python3 lint_vault.py,
-│   │                                propagates exit code. Parser-sensitive invocation encoded once.
-│   └── retro_status.py              Days-since-newest-retro helper (drives the warmup ratchet + hook).
-│
-├── .github/prompts/
-│   ├── Charlie.agent.md             Loader/pointer → CHARLIE.md.
-│   ├── warmup.prompt.md             Warmup workflow + the staleness ratchet (§7, §8).
-│   ├── remember.prompt.md           Durable-capture workflow.
-│   ├── retro.prompt.md              The transactional retro protocol (§7.4).
-│   └── thermonuclear-code-quality-review.prompt.md   Heavy code-review mode; explicit-request only.
-│
-├── .claude/settings.json            ⚠ AS-BUILT advisory retro Stop hook for Claude Code.
-│
-├── YYYY-MM-DD/                       Daily folders, kept at root for ~14 days.
-│   ├── briefing.md                  Morning plan, focus, priorities; ## End of Day appended.
-│   └── logs.md                      Append-only execution journal for the day.
-│
-└── KB/                             ← durable memory (the knowledge store; an Obsidian vault)
+~/ARCHIPELIGO/                       ← workspace parent (NOT a repo); holds OKB + other projects
+├── Arena/  Bayview/  MedAI/         Other, independent git repos. Not part of OKB.
+└── OBSIDIAN/                       ← the OBSIDIAN KNOWLEDGE BASE (OKB)
+    │                                  self-contained git repo + Obsidian vault + whole system.
+    ├── .git/                        Local-only repository. No remote. The ledger.
+    ├── .gitignore                   Excludes .obsidian/, .trash/, .DS_Store, etc.
     ├── .obsidian/                   Obsidian app state. Gitignored. Not memory.
+    │
+    │   ── operating files (working layer; not durable notes; not linted) ──
+    ├── CHARLIE.md                   ★ THE canonical operating document (invariant I6).
+    ├── REFERENCE.md                 This file: descriptive snapshot.
+    ├── PROVENANCE.md                Build record (replaces the original migration documents).
+    ├── profile.md                   Pinned. Stable profile of Jonah + Charlie.
+    ├── Active Context.md            Pinned. Live scratchpad of what is in progress NOW.
+    ├── action-ledger.md             Pinned. Open commitments; erase-free (completions move, never delete).
+    ├── tools/
+    │   ├── lint_vault.py            Schema linter. Python-3 stdlib only; checks only the durable subtree.
+    │   ├── lint.sh                  The ONLY sanctioned invocation. Parser-sensitive line encoded once.
+    │   └── retro_status.py          Days-since-newest-retro helper (drives the warmup ratchet).
+    ├── YYYY-MM-DD/                   Daily folders, kept ~14 days.
+    │   ├── briefing.md              Morning plan, focus, priorities; ## End of Day appended.
+    │   └── logs.md                  Append-only execution journal for the day.
+    │
+    │   ── durable memory (the only schema-linted material) ──
     ├── Meta-Cognition.md            Process memory: how Charlie improves Charlie. Holds the
     │                                Growth Triggers (§13). type: concept; folder-law exempt.
     ├── Retrieval Strategies.md      Hub of proven lookup patterns. type: concept; folder-law exempt.
@@ -97,21 +88,25 @@ log with near-zero ceremony; defer all durability judgment to compaction (retro)
         ├── Decisions/   type: decision     └── Retro/      type: retro
 ```
 
+*Optional:* Claude Code prompt-files / a Stop hook can mirror the workflows, but they are not
+part of OKB and not required; `CHARLIE.md` §7 is authoritative.
+
 ## 4. State model
 
 | Layer | Contents | Stability | Where it lives |
 |---|---|---|---|
 | **Immediate** | Current prompt, chat, tool output | Seconds–hours | Context window only |
-| **Working** | Active Context, action ledger, today's briefing + logs | Hours–days | Workspace root + today's folder |
-| **Durable** | Vault notes, Meta-Cognition, Retrieval Strategies | Sessions–permanent | `KB/` |
+| **Working** | Active Context, action ledger, today's briefing + logs | Hours–days | Repo root + today's `YYYY-MM-DD/` folder |
+| **Durable** | Typed notes, Meta-Cognition, Retrieval Strategies | Sessions–permanent | `Notes/`, `Inbox/`, `Archive/` + the two hubs |
 
-Routing: matters today → briefing/logs. Matters across sessions → vault. Changes how Charlie
-operates → Meta-Cognition. Changes how Charlie searches → Retrieval Strategies. Unclear → Inbox.
+Routing: matters today → briefing/logs. Matters across sessions → a typed note. Changes how
+Charlie operates → Meta-Cognition. Changes how Charlie searches → Retrieval Strategies. Unclear
+→ Inbox.
 
 ## 5. Data lifecycle
 
 **Write path:** session events → appended to `logs.md` (no in-session durability judgment) →
-retro reads uncompacted logs → extracts durable facts/decisions into typed vault notes
+retro reads uncompacted logs → extracts durable facts/decisions into typed notes
 (canonical-note-first: update in place, never duplicate) → detects supersession (old note
 marked, never silently contradicted) → promotes repeatedly load-bearing material toward pinned
 files → demotes/evicts pinned material over budget → git commit. Daily logs are immutable after
@@ -127,7 +122,9 @@ where the system gets smarter rather than just bigger.
 
 ## 6. Vault schema (enforced by lint)
 
-Every `.md` under `KB/` carries YAML frontmatter:
+The vault holds operating files and durable notes side by side; **only the durable-note subtree
+is schema-enforced** — `Notes/`, `Inbox/`, `Archive/`, and the two root hub files. Each durable
+note carries YAML frontmatter:
 
 ```yaml
 ---
@@ -146,16 +143,16 @@ fact gets `status: superseded` + `superseded_by`; it is never edited into agreem
 superseded note may only be cited alongside its successor. (4) **Canonical-note-first** — update
 the existing canonical note in place; creating a near-duplicate is a lint violation.
 
-**Linter contract** (`tools/lint.sh`): walks `KB/` recursively; FAILS on missing/invalid
-frontmatter, bad type/created/status, folder↔type mismatch, superseded without resolvable
-superseded_by, dangling superseded_by, near-duplicate filenames. Output: one violation per line
-`FILE :: RULE :: DETAIL` + summary counts (notes by type, by status, Inbox depth). Exit 0 clean,
-exit 1 otherwise. Runs at every retro; may be run manually anytime.
+**Linter contract** (`tools/lint.sh`): walks the durable-note subtree (skipping the operating
+files that share the vault); FAILS on missing/invalid frontmatter, bad type/created/status,
+folder↔type mismatch, superseded without resolvable superseded_by, dangling superseded_by,
+near-duplicate filenames. Output: one violation per line `FILE :: RULE :: DETAIL` + summary
+counts (notes by type, by status, Inbox depth). Exit 0 clean, exit 1 otherwise. Runs at every
+retro; may be run manually anytime.
 
 ## 7. Workflows (trigger → flow → outcome)
 
-Summarized here; the authoritative, step-by-step versions live in `CHARLIE.md` §7 and the
-`.github/prompts/` files.
+Summarized here; the authoritative, step-by-step versions live in `CHARLIE.md` §7.
 
 - **Morning** ("good morning") → read profile + yesterday's briefing → ask priorities → create
   today's briefing + logs.
@@ -175,10 +172,9 @@ Summarized here; the authoritative, step-by-step versions live in `CHARLIE.md` �
 1. **Git (I1):** every overwrite is recoverable; retros are diffable
    (`git log -p "Active Context.md"` = the history of Charlie's understanding). Local-only; no
    remote. Never amend/rebase/reset-hard; rollback is `git revert`.
-2. **Retro-by-default (I2):** ⚠ AS-BUILT Claude Code Stop hook in `.claude/settings.json`
-   prompting retro on exit (advisory); the warmup staleness ratchet is the primary mechanism and
-   applies regardless. Skips are never silent — each writes `retro deferred YYYY-MM-DD` to the
-   action ledger.
+2. **Retro-by-default (I2):** the warmup staleness ratchet is the primary, sufficient mechanism;
+   an optional Claude Code Stop hook may mirror it (⚠ AS-BUILT, not part of OKB). Skips are never
+   silent — each writes `retro deferred YYYY-MM-DD` to the action ledger.
 3. **Lint (I3):** schema violations block a clean retro; the linter depends only on stock
    tooling (Python 3 stdlib) so enforcement survives tooling changes.
 4. **Supersession (I4):** structural (frontmatter), not prose; retrieval respects it.
@@ -191,8 +187,8 @@ Summarized here; the authoritative, step-by-step versions live in `CHARLIE.md` �
 ## 9. The invariant contract (I1–I9)
 
 - **I1** No destructive write is unrecoverable (git).
-- **I2** Compaction is the default, not the exception (hook + ratchet; logged skips).
-- **I3** Every vault note conforms to schema (lint, machine-checked).
+- **I2** Compaction is the default, not the exception (ratchet; optional hook; logged skips).
+- **I3** Every durable note conforms to schema (lint, machine-checked).
 - **I4** Superseded knowledge cannot win retrieval (status fields + convention).
 - **I5** Multi-step state transitions are resumable; destructive step last (retro WAL).
 - **I6** Exactly one canonical operating document (CHARLIE.md; all others are pointers).
@@ -207,10 +203,10 @@ retros that fired by default, without Jonah initiating them.
 
 | Tool | Invocation | Notes |
 |---|---|---|
-| Vault linter | `tools/lint.sh` | Only sanctioned form; never retype the raw python line |
+| Vault linter | `tools/lint.sh` | Run from the repo root. Never retype the raw python line |
 | Retro staleness | `python3 tools/retro_status.py` | Drives the warmup ratchet |
-| Git ledger | standard git, local | Commits at every retro |
-| Obsidian (app) | manual | Viewer/editor only; state dir gitignored; close during bulk moves |
+| Git ledger | standard git, local | Repo root is the OKB (`OBSIDIAN/`); commits at every retro |
+| Obsidian (app) | manual | Open `OBSIDIAN/`; viewer/editor only; state dir gitignored; close during bulk moves |
 
 Environment constraints (load-bearing): personal macOS machine; git, Python 3, and POSIX shell
 present; enforcement tooling is Python-stdlib-only by policy so it survives tooling changes; git
@@ -218,7 +214,7 @@ is fully local (internal content is not published off-machine).
 
 ## 11. Operating rules (condensed)
 
-Write: today → briefing/logs · durable → vault (canonical-first) · process change →
+Write: today → briefing/logs · durable → a typed note (canonical-first) · process change →
 Meta-Cognition · search change → Retrieval Strategies · unclear → Inbox. Read: pinned set + ≤ 3
 links; grep on demand; no broad dumps. Never: duplicate durable notes; silent contradictions
 (use supersession); delete ledger lines; cosmetic busywork; risky/irreversible actions without
@@ -232,12 +228,12 @@ proactive, explicit about limits and uncertainty.
 `MIGRATION.md` / `MIGRATION-REPORT.md`; this instance was built fresh rather than migrated, so
 those are intentionally absent and `PROVENANCE.md` stands in their place.
 
-## 13. Growth triggers (verbatim policy in `KB/Meta-Cognition.md` — invariant I9)
+## 13. Growth triggers (verbatim policy in `Meta-Cognition.md` — invariant I9)
 
 | Component (deferred) | Build when… | Form |
 |---|---|---|
 | FTS5/SQLite derived index | grep returns too many hits to rank by eye on two occasions, OR vault > ~150 notes | Single SQLite file; index derived from Markdown; rebuildable |
-| Weekly rollup tier | Monday warmup (3 briefings) breaches the pinned budget twice | Sunday compaction → `KB/Notes/Retro/YYYY-Www weekly.md` |
+| Weekly rollup tier | Monday warmup (3 briefings) breaches the pinned budget twice | Sunday compaction → `Notes/Retro/YYYY-Www weekly.md` |
 | Structured task state | action ledger > ~30 open items, or dependencies stop fitting a flat list, twice | Separate table/file from knowledge memory (different retention semantics) |
 | Embeddings / semantic search | keyword search misses a known-existing note via vocabulary drift, twice | Local embedding model; index remains derived/disposable |
 

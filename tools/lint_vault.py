@@ -2,7 +2,12 @@
 """
 Vault schema linter for the memory system.
 
-Walks the vault (KB/ by default) recursively and enforces the schema defined in CHARLIE.md.
+The vault (the folder that contains this tools/ dir -- OBSIDIAN -- by default) hosts both the
+operating/working files and the durable notes. This linter checks ONLY the durable-note subtree:
+`Notes/`, `Inbox/`, `Archive/`, and the two root hub files. Operating files that share the vault
+(CHARLIE.md, the pinned set, the daily folders, tools/, etc.) are not durable notes and are
+skipped. Enforces the schema defined in CHARLIE.md.
+
 Stock Python 3 standard library only -- no pip installs (policy: enforcement tooling depends
 only on a stock dev install, so it survives tooling changes).
 
@@ -34,6 +39,11 @@ VALID_STATUS = {"active", "superseded", "archived"}
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 SKIP_DIRS = {".obsidian", ".trash", ".git"}
+
+# The durable-note subtree -- the only thing schema-checked. Everything else in the vault
+# (operating docs, the pinned set, daily folders, tools/) is working material, not a note.
+NOTE_DIRS = {"Notes", "Inbox", "Archive"}
+HUB_FILES = {"Meta-Cognition.md", "Retrieval Strategies.md"}
 
 
 # --- frontmatter parsing ---------------------------------------------------
@@ -84,8 +94,14 @@ def lint(vault):
 
     md_files = []
     for p in sorted(vault.rglob("*.md")):
-        if any(part in SKIP_DIRS for part in p.relative_to(vault).parts):
+        rel = p.relative_to(vault)
+        parts = rel.parts
+        if any(part in SKIP_DIRS for part in parts):
             continue
+        in_note_dir = len(parts) > 1 and parts[0] in NOTE_DIRS
+        is_hub = len(parts) == 1 and p.name in HUB_FILES
+        if not (in_note_dir or is_hub):
+            continue  # operating/working file sharing the vault -- not a durable note
         md_files.append(p)
 
     for p in md_files:
@@ -192,9 +208,9 @@ def lint(vault):
 
 
 def main():
-    here = Path(__file__).resolve().parent          # tools/
-    repo_root = here.parent                          # workspace root
-    vault = Path(sys.argv[1]) if len(sys.argv) > 1 else repo_root / "KB"
+    here = Path(__file__).resolve().parent          # tools/ (lives inside the vault)
+    vault_default = here.parent                      # the vault root (OBSIDIAN)
+    vault = Path(sys.argv[1]) if len(sys.argv) > 1 else vault_default
 
     if not vault.exists():
         print(f"VAULT NOT FOUND :: {vault}", file=sys.stderr)

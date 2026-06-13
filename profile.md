@@ -6,7 +6,7 @@ against the pinned-set budget. Detail belongs in vault notes, not here.
 ## Jonah (the human)
 - Name: Jonah Elliott.
 - Contact: jonahwelliott@gmail.com.
-- Machine: personal Mac mini; workspace at `~/CODE`.
+- Machine: personal Mac mini; the OKB repo lives at `~/ARCHIPELIGO/OBSIDIAN/`, alongside other projects.
 - _Role / domain:_ <!-- fill in: what you work on -->
 - _Tools you live in:_ <!-- fill in: editor, key apps/services -->
 
@@ -23,4 +23,4 @@ against the pinned-set budget. Detail belongs in vault notes, not here.
 
 ## Baseline context
 - _Ongoing themes, recurring projects, standing constraints — keep to a few lines; promote
-  detail into `KB/Notes/Projects/` and link rather than expanding here._
+  detail into `Notes/Projects/` and link rather than expanding here._
