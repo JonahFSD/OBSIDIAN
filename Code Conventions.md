@@ -10,11 +10,11 @@ or stack gets its own note, linked from here, so they cluster together in the gr
 
 ## Principles
 - [[Good Code in the AI Age]] — durable LLM failure modes (the "why") + caveats.
-- [[Invariants]] — the coding invariants that follow (append-only ledger).
+- [[Invariants]] — the coding invariants that follow.
 
 ## Practices
-- [[Writing Tests]] — test-writing heuristics (append-only ledger).
-- [[Writing Documentation]] — documentation heuristics (append-only ledger).
+- [[Writing Tests]] — test-writing heuristics.
+- [[Writing Documentation]] — documentation heuristics.
 
 ## Languages & stacks
 - [[TypeScript Development]] — type system, generics, utility types, type guards, React/Node patterns, `tsconfig`, strict mode.

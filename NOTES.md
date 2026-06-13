@@ -15,7 +15,7 @@ _What you're doing right now and the goal — re-read this to stay on track._
 - [ ] …
 
 ## Progress / findings
-_Append as you go; prune once resolved or folded into a commit / decision._
+_Note progress as you go; prune once resolved or folded into a commit / decision._
 
 ## Open questions / blockers
 _…_

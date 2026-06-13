@@ -2,15 +2,13 @@
 type: concept
 created: 2026-06-13
 status: active
-description: Append-only ledger of heuristics for writing good documentation, with an AI-age lens. Each entry — heuristic → failure it prevents → confidence → source. Unifying rule — minimize what the reader (human or agent) must process to act, and keep it from drifting.
+description: Heuristics for writing good documentation, with an AI-age lens. Each entry — heuristic → failure it prevents → confidence → source. Unifying rule — minimize what the reader (human or agent) must process to act, and keep it from drifting.
 ---
 # Writing Documentation
 
-Append-only ledger of documentation heuristics. **Append; supersede — don't overwrite or delete.**
-Unifying rule: *minimize what the reader (human or agent) must process to act correctly, and keep
-it from drifting from reality.* Each entry: heuristic → the failure it prevents → (confidence) → source.
-
-## Active
+Heuristics for writing good documentation. Unifying rule: *minimize what the reader (human or
+agent) must process to act correctly, and keep it from drifting from reality.* Each entry:
+heuristic → the failure it prevents → (confidence) → source.
 
 1. **Sort each page into one Diátaxis mode — tutorial / how-to / reference / explanation — and
    don't mix.** Prevents a page that teaches, instructs, describes, and explains at once and serves
@@ -31,9 +29,9 @@ it from drifting from reality.* Each entry: heuristic → the failure it prevent
 7. **Comments explain WHY, not WHAT — and prefer self-explanatory code, because comments drift.**
    Prevents redundant noise and lost rationale; code-comment inconsistency is pervasive. (med) —
    [Code Tells You How, Comments Tell You Why](https://blog.codinghorror.com/code-tells-you-how-comments-tell-you-why/)
-8. **Record significant decisions as short, immutable ADRs (supersede, don't edit).** Prevents
-   future engineers unknowingly defeating earlier decisions for lack of rationale. (med-high) —
-   [Documenting Architecture Decisions (Nygard)](https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions) — lands in `decisions/`.
+8. **Record significant decisions as short decision notes (context / decision / consequences).**
+   Prevents future engineers unknowingly defeating earlier decisions for lack of rationale.
+   (med-high) — [Documenting Architecture Decisions (Nygard)](https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions) — lands in `decisions/`.
 9. **A README is an orientation map (what / run / contribute / license), not a manual — push depth
    elsewhere.** Prevents both too-thin (can't start) and too-bloated (unread). (med) —
    [Make a README](https://www.makeareadme.com/)
@@ -46,10 +44,6 @@ it from drifting from reality.* Each entry: heuristic → the failure it prevent
 12. **Optimize agent-facing docs for signal density, not volume — more context degrades accuracy
     ("context rot").** Prevents stuffing the window with whole doc sets the model must search.
     (med-high) — [Context rot](https://redis.io/blog/context-rot/)
-
-## Superseded
-
-_(none yet — when a heuristic is revised, move the old one here with a pointer to its replacement.)_
 
 ---
 ## Related

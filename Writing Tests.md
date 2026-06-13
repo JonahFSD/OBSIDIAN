@@ -2,16 +2,13 @@
 type: concept
 created: 2026-06-13
 status: active
-description: Append-only ledger of heuristics for writing good tests, with an AI-age lens. Each entry — heuristic → failure it prevents → confidence → source. Tests are the agent's main external verification signal; see [[Invariants]] #2 and #9.
+description: Heuristics for writing good tests, with an AI-age lens. Each entry — heuristic → failure it prevents → confidence → source. Tests are the agent's main external verification signal; see [[Invariants]] #2 and #9.
 ---
 # Writing Tests
 
-Append-only ledger of test-writing heuristics. **Append; supersede — don't overwrite or delete.**
-Tests are the agent's main *external verification signal* ([[Invariants]] #2), so a weak test doesn't
-just miss bugs — it certifies (and, in RL training, rewards) broken code. Each entry:
-heuristic → the failure it prevents → (confidence) → source.
-
-## Active
+Heuristics for writing good tests. Tests are the agent's main *external verification signal*
+([[Invariants]] #2), so a weak test doesn't just miss bugs — it certifies (and, in RL training,
+rewards) broken code. Each entry: heuristic → the failure it prevents → (confidence) → source.
 
 1. **Test observable behavior through the public API, not implementation.** Prevents brittle tests
    that break on a pure refactor and train people to fear refactoring. (high) —
@@ -50,10 +47,6 @@ heuristic → the failure it prevents → (confidence) → source.
     agent-age failure where a wrong test certifies/rewards broken code (RLVR reward-hacking). Let
     agents draft scaffolding and inputs; a human asserts intended behavior. (med-high) —
     [LLMs Gaming Verifiers](https://arxiv.org/abs/2604.15149) · [Test smells in LLM-generated tests](https://arxiv.org/abs/2410.10628)
-
-## Superseded
-
-_(none yet — when a heuristic is revised, move the old one here with a pointer to its replacement.)_
 
 ---
 ## Related

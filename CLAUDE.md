@@ -1,9 +1,9 @@
 # CLAUDE.md — Coding Agent
 
 A lean, curated knowledge base of coding standards and heuristics for an AI coding agent. Follow
-the rules here; read the three notes below on demand for depth. **Keep this file short — a line
-stays only if removing it would cause a mistake.** When in doubt, the live session and the target
-repo's own conventions win over this file.
+the rules here; read the notes below on demand for depth. **Keep this file short — a line stays
+only if removing it would cause a mistake.** When in doubt, the live session and the target repo's
+own conventions win over this file.
 
 ## Always
 - **Verify outside the model.** Trust types, tests, and the build over your own judgment. Run the
@@ -22,14 +22,13 @@ repo's own conventions win over this file.
 ## Working memory
 - Read `NOTES.md` first; record your plan, progress, and decisions there as you work; keep it
   pruned — edit in place and delete stale lines, don't let it grow into contradictory clutter.
-- Durable decisions graduate to `decisions/` (ADR-lite: append-only; supersede, never overwrite).
+- Durable decisions go in `decisions/` — one short file each (context / decision / consequences).
 - Non-negotiable rules belong in the target repo's CI / hooks / linters, not in prose here.
 
 ## Knowledge base (read on demand)
-Knowledge notes are **append-only ledgers** — add entries and supersede; don't overwrite or delete.
 - [[Good Code in the AI Age]] — the durable LLM failure modes (the "why") + caveats.
-- [[Invariants]] — the coding invariants that follow (ledger).
-- [[Writing Tests]] — test-writing heuristics (ledger).
-- [[Writing Documentation]] — documentation heuristics (ledger).
+- [[Invariants]] — the coding invariants that follow.
+- [[Writing Tests]] — test-writing heuristics.
+- [[Writing Documentation]] — documentation heuristics.
 - [[Code Conventions]] — conventions hub (Conventional Commits; per-language standards).
 - [[TypeScript Development]] — TypeScript patterns, generics, utility types, type guards, React/Node, `tsconfig`, strict mode.

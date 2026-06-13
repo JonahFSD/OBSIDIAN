@@ -31,7 +31,7 @@ only when it pays for the context it costs.
 - **Premature convergence.** Agents lock onto the first plausible approach and under-explore.
 - **Statelessness.** No memory persists across sessions; context must be re-loaded every time.
 
-The invariants that follow from these are an append-only ledger: **[[Invariants]]**. Domain
+The invariants that follow from these: **[[Invariants]]**. Domain
 heuristics derived the same way: **[[Writing Tests]]**, **[[Writing Documentation]]**.
 
 ## Skeptic's corner (don't oversell)

@@ -2,16 +2,13 @@
 type: concept
 created: 2026-06-12
 status: active
-description: Append-only ledger of code invariants for the AI age — each grounded in a durable LLM failure mode. See [[Good Code in the AI Age]] for the failure-mode substrate and the caveats.
+description: Code invariants for the AI age — each grounded in a durable LLM failure mode. See [[Good Code in the AI Age]] for the failure-mode substrate and the caveats.
 ---
 # Invariants
 
-Append-only ledger of durable coding invariants. Each earns its place by countering a structural
-LLM failure mode (substrate + sources live in [[Good Code in the AI Age]]). **Append new entries;
-supersede — don't overwrite or delete.** Each entry: what it counters → why it's always true →
-context cost vs. payoff.
-
-## Active
+Durable coding invariants. Each earns its place by countering a structural LLM failure mode
+(substrate + sources in [[Good Code in the AI Age]]). Each entry: what it counters → why it's
+always true → context cost vs. payoff.
 
 1. **Make the context smaller and denser than feels necessary.** *Counters:* finite attention,
    context rot. *Why always true:* attention is a fixed budget; effective << advertised. *Cost/
@@ -28,11 +25,10 @@ context cost vs. payoff.
    *Why:* the type checker is the dominant error gate (~94% of compile errors are type errors) and
    catches ~15% of would-be-shipped bugs — a high-value first filter, never a correctness proof
    (logic bugs type-check). See [[TypeScript Development]].
-5. **Keep history legible and append-only.** Conventional Commits + **small atomic diffs** + the
-   *why* in the message (the diff already shows the *what*). *Counters:* weak localization,
-   unreviewable change. *Why:* human defect-detection collapses past ~400 LOC, and a diff carries
-   no intent; small, typed, machine-parseable history is bisectable and revertible. See
-   [[Code Conventions]].
+5. **Keep history legible.** Conventional Commits + **small atomic diffs** + the *why* in the
+   message (the diff already shows the *what*). *Counters:* weak localization, unreviewable change.
+   *Why:* human defect-detection collapses past ~400 LOC, and a diff carries no intent; small,
+   typed, machine-parseable history is bisectable and revertible. See [[Code Conventions]].
 6. **Optimize for localizability.** Navigable, grep-able, consistently-organized code with
    intention-revealing names. *Counters:* finite attention + editing-the-wrong-thing. *Why:*
    fault-localization precision measurably gates agent repair success; agents navigate by
@@ -48,10 +44,6 @@ context cost vs. payoff.
    *Counters:* sycophancy + premature convergence + false "done." *Why:* agreement is the
    predicted failure, not a signal; "tests near the diff pass" ≠ correct — require a full
    regression run and a behavioral check before trusting a fix. See [[Writing Tests]].
-
-## Superseded
-
-_(none yet — when an invariant is reversed, move it here with a one-line pointer to its replacement.)_
 
 ---
 ## Related
