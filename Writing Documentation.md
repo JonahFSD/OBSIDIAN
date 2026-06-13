@@ -31,7 +31,7 @@ heuristic → the failure it prevents → (confidence) → source.
    [Code Tells You How, Comments Tell You Why](https://blog.codinghorror.com/code-tells-you-how-comments-tell-you-why/)
 8. **Record significant decisions as short decision notes (context / decision / consequences).**
    Prevents future engineers unknowingly defeating earlier decisions for lack of rationale.
-   (med-high) — [Documenting Architecture Decisions (Nygard)](https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions) — lands in `decisions/`.
+   (med-high) — [Documenting Architecture Decisions (Nygard)](https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions).
 9. **A README is an orientation map (what / run / contribute / license), not a manual — push depth
    elsewhere.** Prevents both too-thin (can't start) and too-bloated (unread). (med) —
    [Make a README](https://www.makeareadme.com/)
