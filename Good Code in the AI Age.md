@@ -12,8 +12,8 @@ non-persistent reader that cannot reliably check its own work.** A practice **ea
 if and only if it either (a) raises signal density / lowers noise in a finite context, or
 (b) produces an **external, deterministic, machine-readable verification signal the model cannot
 fake.** Everything below is justified by failure modes that trace to the architecture or training
-of LLMs — so they're durable across model versions, not prompt hacks. (This is the same logic as
-the OKB's own "earns its place" rule — see [[Meta-Cognition]].)
+of LLMs — so they're durable across model versions, not prompt hacks. A practice earns its weight
+only when it pays for the context it costs.
 
 ## The durable failure modes (the "always true" substrate)
 
@@ -62,8 +62,8 @@ the OKB's own "earns its place" rule — see [[Meta-Cognition]].)
    always-loaded rules file (CLAUDE.md/AGENTS.md) makes the model ignore the rules that matter —
    the important ones drown in noise. The convention must pay rent in prevented errors.
 8. **Persist memory in durable external files; re-load at session start.** *Counters:*
-   statelessness. *Why:* a fresh session knows nothing it wasn't re-told; durable decisions/
-   conventions/gotchas beat re-deriving context (this is what the OKB *is* — see [[CHARLIE]]).
+   statelessness. *Why:* a fresh session knows nothing it wasn't re-told; persist decisions,
+   conventions, and gotchas in durable files and re-load them rather than re-deriving context.
 9. **Don't trust agreement; force the counter-case, and verify behavior not proximity.**
    *Counters:* sycophancy + premature convergence + false "done." *Why:* agreement is the
    predicted failure, not a signal; "tests near the diff pass" ≠ correct — require a full
@@ -80,13 +80,6 @@ the OKB's own "earns its place" rule — see [[Meta-Cognition]].)
 - **Docstrings help only ~1–3%** in controlled studies — write them for humans/intent, don't
   expect magic for agent correctness.
 - "AI is degrading code quality" macro stats are vendor analyses, not peer-reviewed — low confidence.
-
-## How the OKB already embodies this
-
-Append-only git ledger with derived/disposable projections (1, 5); the pinned-set token budget
-(1, 7); supersession over silent edits (verification/legibility); grep-first retrieval (6); the
-durable memory files re-loaded at warmup (8); the lint gate as external verification (2). The main
-gap is automating invariant 2/9 — a reviewer/test pass the system runs itself.
 
 ## Sources
 
@@ -105,4 +98,4 @@ gap is automating invariant 2/9 — a reviewer/test pass the system runs itself.
 
 ---
 ## Related
-[[Code Conventions]] · [[agent-setup-best-practices]] · [[Meta-Cognition]] · [[TypeScript Development]] · [[CHARLIE]]
+[[Code Conventions]] · [[TypeScript Development]]
