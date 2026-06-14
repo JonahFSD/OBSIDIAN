@@ -17,5 +17,10 @@ or stack gets its own note, linked from here, so they cluster together in the gr
 
 ## Languages & stacks
 - [[TypeScript Development]] — type system, generics, utility types, type guards, React/Node patterns, `tsconfig`, strict mode.
+- [[Convex Conventions]] — validators as the boundary, query/mutation/action model, OCC as the ledger pattern, convex-test, HIPAA/BAA.
+- [[React Native & Expo Security]] — Maestro/Detox testing, New Architecture/Hermes, OWASP Mobile Top 10 + MASVS, SecureStore, HIPAA for a PHI app.
 
-<!-- Add more convention notes here (e.g. Python, Go, React, CSS) and link them above. -->
+## Agents & security
+- [[Agent Eval & Injection Defense]] — eval-harness discipline, prompt-injection design patterns + CaMeL, GenAI tracing, slopsquatting defense, OWASP LLM/Agentic.
+
+<!-- Add more convention notes here (e.g. Python, Go, CSS) and link them above. -->
