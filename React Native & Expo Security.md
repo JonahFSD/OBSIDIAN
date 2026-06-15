@@ -1,5 +1,5 @@
 ---
-description: Mobile-stack conventions for React Native / Expo — testing (Maestro/Detox, no Playwright), the New Architecture / Hermes baseline, OWASP Mobile Top 10 2024 + MASVS, secure storage and device hardening, and HIPAA for a PHI/visit-recording app. The mobile companion to [[Convex Conventions]] (backend) and [[Agent Eval & Injection Defense]] (the chatbot). Web-React conventions (Next server/client, Playwright) do not transfer.
+description: Mobile-stack conventions for React Native / Expo — testing (Maestro/Detox, no Playwright), the New Architecture / Hermes baseline, OWASP Mobile Top 10 2024 + MASVS, secure storage and device hardening. The mobile companion to [[Convex Conventions]] (backend) and [[Agent Eval & Injection Defense]] (the chatbot). Web-React conventions (Next server/client, Playwright) do not transfer.
 ---
 # React Native & Expo Security
 
@@ -23,17 +23,8 @@ Facts tagged **[V]** = verified against primary sources (2026-06-14); **[R]** = 
 
 ## Secure storage + device hardening
 - `expo-secure-store` → Keychain (iOS) / Keystore (Android), hardware-backed where available, "encrypted at the OS level, not in JavaScript." Use for **tokens/small secrets only** — not a database; large/offline data belongs elsewhere. Exclude it from Android Auto Backup. **[V]/[R]**
-- **Ban in review/CI** (these are [[Deterministic Gates]] candidates — lint / secret-scan / grep rules): base64 "encoding as encryption"; AsyncStorage with a key prefix for secrets; persisting a Redux tree containing PHI; shipping tokens/PHI to Sentry/Crashlytics.
-- Add: TLS + certificate/SSL pinning; jailbreak/root detection (revoke tokens on detection); biometric gating for PHI access via `expo-local-authentication`; deep-link hygiene — deep links are **not** secure, never pass PHI in them. **[R]**
-
-## HIPAA for a visit-recording app
-For an app that records visits, transcribes, summarizes, and runs a citation-grounded chatbot over PHI:
-- Encrypt PHI at rest (AES-256), keys in Keychain/Keystore (hardware-backed), never in source or AsyncStorage; unique IVs, key rotation, KMS/HSM for key-wrapping. **[R]**
-- Encrypt in transit (TLS); short-lived access tokens + refresh-token rotation; OIDC + PKCE; MFA; re-auth for sensitive actions. **[R]**
-- Audit-log every PHI access (who/what/when/where/why) with correlation IDs but **exclude PHI payloads from logs**. **[R]**
-- **BAAs with every vendor that touches PHI** — hosting, transcription, logging, crash reporting, LLM/summarization. This is the decisive architectural question, not a checkbox. **[V]** Convex's BAA covers the backend ([[Convex Conventions]]).
-- On-device vs cloud transcription: on-device keeps PHI off third-party servers and **shrinks BAA scope**; cloud is higher-quality but needs a signed BAA + minimum-necessary payloads. **Default to on-device** for the raw audio→text step where quality permits. **[R]**
-- **Hard gate:** no real PHI in the system until every BAA is signed (mirrors [[Convex Conventions]]).
+- **Ban in review/CI** (these are [[Deterministic Gates]] candidates — lint / secret-scan / grep rules): base64 "encoding as encryption"; AsyncStorage with a key prefix for secrets; persisting a Redux tree containing secrets; shipping tokens/secrets to Sentry/Crashlytics.
+- Add: TLS + certificate/SSL pinning; jailbreak/root detection (revoke tokens on detection); biometric gating for sensitive actions via `expo-local-authentication`; deep-link hygiene — deep links are **not** secure, never pass secrets/tokens in them. **[R]**
 
 ## Sources
 - [OWASP Mobile Top 10 (2024)](https://owasp.org/www-project-mobile-top-10/) · [OWASP MASVS](https://mas.owasp.org/MASVS/)

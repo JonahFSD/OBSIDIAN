@@ -9,6 +9,7 @@ or stack gets its own note, linked from here, so they cluster together in the gr
 ## Principles
 - [[Good Code in the AI Age]] — durable LLM failure modes (the "why") + caveats.
 - [[Invariants]] — the coding invariants that follow.
+- [[Deterministic Methodology]] — the named methodologies behind the gates (CbC, DbC, neurosymbolic, constrained decoding, flow engineering); vocabulary for prior art.
 
 ## Practices
 - [[Writing Tests]] — test-writing heuristics.
@@ -17,8 +18,8 @@ or stack gets its own note, linked from here, so they cluster together in the gr
 
 ## Languages & stacks
 - [[TypeScript Development]] — type system, generics, utility types, type guards, React/Node patterns, `tsconfig`, strict mode.
-- [[Convex Conventions]] — validators as the boundary, query/mutation/action model, OCC as the ledger pattern, convex-test, HIPAA/BAA.
-- [[React Native & Expo Security]] — Maestro/Detox testing, New Architecture/Hermes, OWASP Mobile Top 10 + MASVS, SecureStore, HIPAA for a PHI app.
+- [[Convex Conventions]] — validators as the boundary, query/mutation/action model, OCC as the ledger pattern, convex-test.
+- [[React Native & Expo Security]] — Maestro/Detox testing, New Architecture/Hermes, OWASP Mobile Top 10 + MASVS, SecureStore, device hardening.
 
 ## Agents & security
 - [[Agent Eval & Injection Defense]] — eval-harness discipline, prompt-injection design patterns + CaMeL, GenAI tracing, slopsquatting defense, OWASP LLM/Agentic.

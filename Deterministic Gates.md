@@ -9,9 +9,16 @@ model, so it can't skip them. This is the load-bearing defense; the always-on ru
 are only a backstop. Wire these into a repo (and the agent's runtime) to make failure-mode
 prevention deterministic.
 
-Gates run in two places: **repo gates** (pre-commit + CI — block bad *code* from landing) and
-**agent-runtime gates** (the agent's own harness — block bad *actions* before they run). Each
-notes the failure cluster it covers and whether it's a hard block or advisory.
+Defense is three layers: **sandbox** (the agent *can't reach* what it shouldn't), **agent-runtime
+gates** (block bad *actions* before they run), and **repo gates** (block bad *code* from landing).
+Each gate below notes the failure cluster it covers and whether it's a hard block or advisory. The
+*why* behind them — the named methodology — is [[Deterministic Methodology]].
+
+## Sandbox — the agent can't reach what it shouldn't
+The outermost layer: isolate the agent so a bad action has no blast radius. **[V]** (2026-06)
+- **OS-level:** Anthropic `sandbox-runtime` — filesystem + network jail (sandbox-exec / bubblewrap + egress proxy), built into Claude Code as `/sandbox`. Caveat: an open issue notes the agent can disable it in auto-allow mode, so keep the deny side pinned.
+- **Container-level:** `container-use` — an MCP server giving each agent its own container + git-worktree branch, auto-commit, and a full command log; disposable, reviewable, parallel.
+- Default-deny network + egress allowlist; no prod credentials in the agent's env. This is what actually contains the destructive action a runtime gate misses.
 
 ## Repo gates — block bad code from landing
 
@@ -92,4 +99,4 @@ Agent-runtime deny + verify-before-done (Claude Code `.claude/settings.json`, re
 
 ---
 ## Related
-[[CLAUDE]] · [[Invariants]] · [[Code Conventions]] · [[Good Code in the AI Age]]
+[[CLAUDE]] · [[Deterministic Methodology]] · [[Spec-Driven Build Loop]] · [[Invariants]] · [[Code Conventions]] · [[Good Code in the AI Age]] · [[Agent Eval & Injection Defense]]

@@ -1,5 +1,5 @@
 ---
-description: How to write Convex backends well — validators as the trust boundary, the query/mutation/action model, OCC + determinism as the canonical ledger-pattern example, convex-test, write-conflict avoidance, and HIPAA. Stack-specific companion to [[Invariants]] and [[Deterministic Gates]]; Convex collapses the typed-seam problem (Drizzle/Prisma + tRPC + Zod) into one end-to-end-typed system.
+description: How to write Convex backends well — validators as the trust boundary, the query/mutation/action model, OCC + determinism as the canonical ledger-pattern example, convex-test, and write-conflict avoidance. Stack-specific companion to [[Invariants]] and [[Deterministic Gates]]; Convex collapses the typed-seam problem (Drizzle/Prisma + tRPC + Zod) into one end-to-end-typed system.
 ---
 # Convex Conventions
 
@@ -33,15 +33,9 @@ Corollary — **design to avoid write conflicts**: never read a whole table in a
 - Test scheduled functions / crons with Vitest fake timers + `t.finishInProgressScheduledFunctions` / `t.finishAllScheduledFunctions` — there is no SQL-stack analog. **[V]**
 - Higher fidelity: run the open-source local backend in CI; Convex Pro gives per-PR preview deployments. Coverage is a floor, not a target ([[Writing Tests]] #5; Convex's own testing post says the same). **[V]/[R]**
 
-## HIPAA (PHI apps)
-- Convex is **SOC 2 Type II** and **HIPAA-compliant with a signed BAA** — verbatim: "Provided businesses subject to HIPAA sign Convex's Business Associate Agreement they may process PHI on the platform." 256-bit AES at rest, TLS in transit, hosted on AWS (HIPAA-eligible). **[V]** (primary: convex.dev/security)
-- Gate before real PHI: sign Convex's BAA **and** a BAA with every other vendor touching PHI (transcription, LLM/summarization — confirm a zero-retention path). No real PHI in the system until all BAAs are signed. Device side → [[React Native & Expo Security]]; chatbot side → [[Agent Eval & Injection Defense]].
-- Name collision: **convex.dev** (this backend) ≠ convex.com (an unrelated firm). HIPAA facts here are sourced to convex.dev only.
-
 ## Sources
 - [Argument/Return Validation](https://docs.convex.dev/functions/validation) · [ESLint rules](https://docs.convex.dev/eslint) · [OCC and Atomicity](https://docs.convex.dev/database/advanced/occ) · [convex-test](https://docs.convex.dev/testing/convex-test) · [Best Practices](https://docs.convex.dev/understanding/best-practices/)
 - [Types & Validators cookbook](https://stack.convex.dev/types-cookbook) · [How Convex Works](https://stack.convex.dev/how-convex-works)
-- [Convex Platform Security — HIPAA/SOC 2/BAA](https://www.convex.dev/security)
 
 ---
 ## Related

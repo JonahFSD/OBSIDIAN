@@ -18,6 +18,7 @@ target repo's own conventions win over this file.
 - **Don't trust agreement.** If the user — or your own first idea — might be wrong, say so and
   check; weigh the counter-case before converging.
 - **Match the codebase.** Existing conventions in the repo beat personal preference.
+- **Write the least code that works.** Before adding code, stop at the first rung that holds: does it need to exist (YAGNI) → stdlib → native platform feature → installed dependency → one line → only then the minimum that works. Never cut security, input validation, data-loss handling, or accessibility. (Ponytail.)
 
 ## Safety (the backstop — [[Deterministic Gates]] is what actually enforces these)
 - **Never run irreversible/destructive commands** — force-push, `reset --hard`, `DROP`, prod
